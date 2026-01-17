@@ -53,12 +53,12 @@ try {
   }
 
   const packageMap = {
-    'darwin-x64': '@openclaudecode/micucodeline-darwin-x64',
-    'darwin-arm64': '@openclaudecode/micucodeline-darwin-arm64',
-    'linux-x64': '@openclaudecode/micucodeline-linux-x64',
-    'linux-x64-musl': '@openclaudecode/micucodeline-linux-x64-musl',
-    'win32-x64': '@openclaudecode/micucodeline-win32-x64',
-    'win32-ia32': '@openclaudecode/micucodeline-win32-x64', // Use 64-bit for 32-bit
+    'darwin-x64': '@zuolan/micucodeline-darwin-x64',
+    'darwin-arm64': '@zuolan/micucodeline-darwin-arm64',
+    'linux-x64': '@zuolan/micucodeline-linux-x64',
+    'linux-x64-musl': '@zuolan/micucodeline-linux-x64-musl',
+    'win32-x64': '@zuolan/micucodeline-win32-x64',
+    'win32-ia32': '@zuolan/micucodeline-win32-x64', // Use 64-bit for 32-bit
   };
 
   const packageName = packageMap[platformKey];

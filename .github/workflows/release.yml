@@ -190,9 +190,9 @@ jobs:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
         cd npm-publish/main
-        echo "📦 Publishing @openclaudecode/micucodeline"
+        echo "📦 Publishing @zuolan/micucodeline"
         npm publish --access public
-        echo "✅ Published @openclaudecode/micucodeline"
+        echo "✅ Published @zuolan/micucodeline"
         echo ""
         echo "🎉 NPM packages published successfully!"
         echo "Install with: npm install -g @zuolan/micucodeline"
