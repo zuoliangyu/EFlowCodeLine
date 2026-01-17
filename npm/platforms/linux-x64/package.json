@@ -1,6 +1,6 @@
 {
-  "name": "@openclaudecode/micucodeline-linux-x64",
-  "version": "0.0.0",
+  "name": "@zuolan/micucodeline-linux-x64",
+  "version": "1.0.0",
   "description": "Linux x64 binary for MicuCodeLine",
   "files": ["micucodeline"],
   "os": ["linux"],

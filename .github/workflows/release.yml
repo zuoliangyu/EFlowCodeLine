@@ -173,11 +173,11 @@ jobs:
       run: |
         # Publish platform packages first
         for platform in darwin-x64 darwin-arm64 linux-x64 linux-x64-musl win32-x64; do
-          echo "📦 Publishing @openclaudecode/micucodeline-$platform"
+          echo "📦 Publishing @zuolan/micucodeline-$platform"
           cd npm-publish/$platform
           npm publish --access public
           cd ../..
-          echo "✅ Published @openclaudecode/micucodeline-$platform"
+          echo "✅ Published @zuolan/micucodeline-$platform"
         done
 
     - name: Wait for NPM registry

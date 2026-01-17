@@ -1,7 +1,7 @@
 {
-  "name": "@openclaudecode/micucodeline-darwin-arm64",
-  "version": "0.0.0",
-  "description": "macOS ARM64 binary for MicuCodeLine",
+  "name": "@zuolan/micucodeline-darwin-arm64",
+  "version": "1.0.0",
+  "description": "macdarwin ARM64 binary for MicuCodeLine",
   "files": ["micucodeline"],
   "os": ["darwin"],
   "cpu": ["arm64"],

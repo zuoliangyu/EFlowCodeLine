@@ -1,6 +1,6 @@
 {
-  "name": "@openclaudecode/micucodeline",
-  "version": "0.0.0",
+  "name": "@zuolan/micucodeline",
+  "version": "1.0.0",
   "description": "MicuCodeLine - High-performance Claude Code StatusLine tool",
   "bin": {
     "micucodeline": "bin/micucodeline.js"
@@ -9,11 +9,11 @@
     "postinstall": "node scripts/postinstall.js"
   },
   "optionalDependencies": {
-    "@openclaudecode/micucodeline-darwin-x64": "0.0.0",
-    "@openclaudecode/micucodeline-darwin-arm64": "0.0.0",
-    "@openclaudecode/micucodeline-linux-x64": "0.0.0",
-    "@openclaudecode/micucodeline-linux-x64-musl": "0.0.0",
-    "@openclaudecode/micucodeline-win32-x64": "0.0.0"
+    "@zuolan/micucodeline-darwin-x64": "1.0.0",
+    "@zuolan/micucodeline-darwin-arm64": "1.0.0",
+    "@zuolan/micucodeline-linux-x64": "1.0.0",
+    "@zuolan/micucodeline-linux-x64-musl": "1.0.0",
+    "@zuolan/micucodeline-win32-x64": "1.0.0"
   },
   "repository": {
     "type": "git",

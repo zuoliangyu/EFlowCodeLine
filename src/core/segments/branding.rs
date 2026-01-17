@@ -14,9 +14,7 @@ impl BrandingSegment {
 impl Segment for BrandingSegment {
     fn collect(&self, _input: &InputData) -> Option<SegmentData> {
         // 只在有 balance_config.json 时显示（表示使用 OpenClaudeCode）
-        if BalanceConfig::load().is_none() {
-            return None;
-        }
+        BalanceConfig::load()?;
 
         Some(SegmentData {
             primary: String::new(),
