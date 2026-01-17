@@ -195,4 +195,4 @@ jobs:
         echo "✅ Published @openclaudecode/micucodeline"
         echo ""
         echo "🎉 NPM packages published successfully!"
-        echo "Install with: npm install -g @openclaudecode/micucodeline"
+        echo "Install with: npm install -g @zuolan/micucodeline"

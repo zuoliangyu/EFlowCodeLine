@@ -4,7 +4,7 @@ MicuCodeLine 是 openclaudecode 站特供版 Claude Code 状态栏工具。
 
 ## 安装
 ```bash
-npm install -g @openclaudecode/micucodeline
+npm install -g @zuolan/micucodeline
 ```
 
 安装后默认路径：`~/.claude/micucodeline/micucodeline`

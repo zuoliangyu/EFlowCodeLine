@@ -80,7 +80,7 @@ const binaryPath = path.join(__dirname, '..', 'node_modules', packageName, binar
 if (!fs.existsSync(binaryPath)) {
   console.error(`Error: Binary not found at ${binaryPath}`);
   console.error('This might indicate a failed installation or unsupported platform.');
-  console.error('Please try reinstalling: npm install -g @openclaudecode/micucodeline');
+  console.error('Please try reinstalling: npm install -g @zuolan/micucodeline');
   console.error(`Expected package: ${packageName}`);
   process.exit(1);
 }
