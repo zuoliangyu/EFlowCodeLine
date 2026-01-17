@@ -3,8 +3,8 @@
 ![Language:Rust](https://camo.githubusercontent.com/b858ce7ffb2054312ada07b2be7896f91eb95e0ca40f502793f23f96e0dd180d/68747470733a2f2f696d672e736869656c64732e696f2f7374617469632f76313f6c6162656c3d4c616e6775616765266d6573736167653d5275737426636f6c6f723d6f72616e6765267374796c653d666c61742d737175617265)
 ![License:MIT](https://camo.githubusercontent.com/c6a8d48e8b6ef330ef240499a811f77e629e4bdecc8f2327120137fb2406144d/68747470733a2f2f696d672e736869656c64732e696f2f7374617469632f76313f6c6162656c3d4c6963656e7365266d6573736167653d4d495426636f6c6f723d626c7565267374796c653d666c61742d737175617265)
 
-MicuCodeLine 是 **OpenClaudeCode 站特供版** Claude Code 状态栏工具，集成余额显示与主题/TUI 配置。
-- 原作者仓库：https://github.com/Haleclipse/CCometixLine
+MicuCodeLine 是 **MICU OpenClaudeCode 站特供版** Claude Code 状态栏工具，集成余额显示与主题/TUI 配置。
+- MICU 原作者仓库：https://github.com/Haleclipse/CCometixLine
 - OpenClaudeCode 官网：https://www.openclaudecode.cn
 
 ## 效果预览
