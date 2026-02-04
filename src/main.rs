@@ -38,7 +38,10 @@ fn auto_install() {
     // 检查是否需要复制（目标不存在或版本不同）
     let should_copy = if target_path.exists() {
         // 比较文件大小，如果不同则更新
-        match (std::fs::metadata(&current_exe), std::fs::metadata(&target_path)) {
+        match (
+            std::fs::metadata(&current_exe),
+            std::fs::metadata(&target_path),
+        ) {
             (Ok(src_meta), Ok(dst_meta)) => src_meta.len() != dst_meta.len(),
             _ => true,
         }
@@ -52,7 +55,8 @@ fn auto_install() {
             #[cfg(unix)]
             {
                 use std::os::unix::fs::PermissionsExt;
-                let _ = std::fs::set_permissions(&target_path, std::fs::Permissions::from_mode(0o755));
+                let _ =
+                    std::fs::set_permissions(&target_path, std::fs::Permissions::from_mode(0o755));
             }
             eprintln!("✅ 已自动安装到: {}", target_path.display());
         }
@@ -163,13 +167,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             use std::path::PathBuf;
 
             // Try to get config path
-            let config_path: Option<PathBuf> = dirs::config_dir()
-                .map(|p| p.join("eflowcodeline").join("config.toml"));
+            let config_path: Option<PathBuf> =
+                dirs::config_dir().map(|p| p.join("eflowcodeline").join("config.toml"));
 
-            let is_first_run = config_path
-                .as_ref()
-                .map(|p| !p.exists())
-                .unwrap_or(false);
+            let is_first_run = config_path.as_ref().map(|p| !p.exists()).unwrap_or(false);
 
             if is_first_run {
                 // First-time run: show welcome message and launch API setup first
