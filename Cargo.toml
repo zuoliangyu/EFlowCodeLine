@@ -1,6 +1,6 @@
 [package]
 name = "eflowcodeline"
-version = "0.1.0"
+version = "1.2.0"
 edition = "2021"
 description = "EFlowCodeLine (eflowcodeline) - High-performance Claude Code StatusLine tool written in Rust"
 authors = ["Haleclipse"]
