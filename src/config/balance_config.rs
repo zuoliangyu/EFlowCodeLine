@@ -13,7 +13,7 @@ impl BalanceConfig {
         dirs::home_dir()
             .unwrap_or_else(|| PathBuf::from("."))
             .join(".claude")
-            .join("micucodeline")
+            .join("eflowcodeline")
             .join("balance_config.json")
     }
 
@@ -40,6 +40,6 @@ impl BalanceConfig {
     }
 
     pub fn api_url() -> String {
-        "https://www.openclaudecode.cn/api/user/self".to_string()
+        "https://e-flowcode.cc/api/user/self".to_string()
     }
 }

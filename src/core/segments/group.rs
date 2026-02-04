@@ -31,7 +31,7 @@ impl GroupSegment {
         };
 
         let api_url = std::env::var("BALANCE_API_URL")
-            .unwrap_or_else(|_| "https://www.openclaudecode.cn/api/user/self".to_string());
+            .unwrap_or_else(|_| "https://e-flowcode.cc/api/user/self".to_string());
 
         let config = ApiConfig {
             enabled: true,

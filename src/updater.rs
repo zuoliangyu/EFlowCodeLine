@@ -80,7 +80,7 @@ impl UpdateState {
             let config_dir = dirs::home_dir()
                 .unwrap_or_default()
                 .join(".claude")
-                .join("micucodeline");
+                .join("eflowcodeline");
 
             let state_file = config_dir.join(".update_state.json");
 
@@ -195,7 +195,7 @@ impl UpdateState {
             let config_dir = dirs::home_dir()
                 .unwrap_or_default()
                 .join(".claude")
-                .join("micucodeline");
+                .join("eflowcodeline");
 
             std::fs::create_dir_all(&config_dir)?;
             let state_file = config_dir.join(".update_state.json");
@@ -350,12 +350,12 @@ pub mod github {
 
     /// Check for updates from GitHub Releases API
     pub fn check_for_updates() -> Result<Option<GitHubRelease>, Box<dyn std::error::Error>> {
-        let url = "https://api.github.com/repos/zuoliangyu/MICUCODELINE/releases/latest";
+        let url = "https://api.github.com/repos/zuoliangyu/EFlowCodeLine/releases/latest";
 
         let response = ureq::get(url)
             .set(
                 "User-Agent",
-                &format!("MicuCodeLine/{}", env!("CARGO_PKG_VERSION")),
+                &format!("EFlowCodeLine/{}", env!("CARGO_PKG_VERSION")),
             )
             .call()?;
 

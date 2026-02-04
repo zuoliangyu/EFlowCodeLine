@@ -50,12 +50,12 @@ impl ThemePresets {
         Ok(config)
     }
 
-    /// Get the themes directory path (~/.claude/micucodeline/themes/)
+    /// Get the themes directory path (~/.claude/eflowcodeline/themes/)
     fn get_themes_path() -> std::path::PathBuf {
         if let Some(home) = dirs::home_dir() {
-            home.join(".claude").join("micucodeline").join("themes")
+            home.join(".claude").join("eflowcodeline").join("themes")
         } else {
-            std::path::PathBuf::from(".claude/micucodeline/themes")
+            std::path::PathBuf::from(".claude/eflowcodeline/themes")
         }
     }
 

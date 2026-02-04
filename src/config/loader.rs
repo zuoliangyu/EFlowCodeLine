@@ -63,12 +63,12 @@ impl ConfigLoader {
         Ok(())
     }
 
-    /// Get the themes directory path (~/.claude/micucodeline/themes/)
+    /// Get the themes directory path (~/.claude/eflowcodeline/themes/)
     pub fn get_themes_path() -> PathBuf {
         if let Some(home) = dirs::home_dir() {
-            home.join(".claude").join("micucodeline").join("themes")
+            home.join(".claude").join("eflowcodeline").join("themes")
         } else {
-            PathBuf::from(".claude/micucodeline/themes")
+            PathBuf::from(".claude/eflowcodeline/themes")
         }
     }
 
@@ -142,14 +142,14 @@ impl Config {
         Ok(())
     }
 
-    /// Get the default config file path (~/.claude/micucodeline/config.toml)
+    /// Get the default config file path (~/.claude/eflowcodeline/config.toml)
     fn get_config_path() -> PathBuf {
         if let Some(home) = dirs::home_dir() {
             home.join(".claude")
-                .join("micucodeline")
+                .join("eflowcodeline")
                 .join("config.toml")
         } else {
-            PathBuf::from(".claude/micucodeline/config.toml")
+            PathBuf::from(".claude/eflowcodeline/config.toml")
         }
     }
 

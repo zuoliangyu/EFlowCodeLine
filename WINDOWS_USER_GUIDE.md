@@ -1,4 +1,4 @@
-# MicuCodeLine Windows 用户手册
+# EFlowCodeLine Windows 用户手册
 
 ## 目录
 - [简介](#简介)
@@ -11,7 +11,7 @@
 
 ## 简介
 
-MicuCodeLine 是一个为 Claude Code 设计的高性能状态栏工具，专为 OpenClaudeCode 站定制。它提供：
+EFlowCodeLine 是一个为 Claude Code 设计的高性能状态栏工具，专为 EFlowCodeLine 站定制。它提供：
 - 实时余额显示
 - 多主题支持
 - 交互式 TUI 配置界面
@@ -33,8 +33,8 @@ MicuCodeLine 是一个为 Claude Code 设计的高性能状态栏工具，专为
 
 2. **克隆仓库**
    ```bash
-   git clone https://github.com/zuoliangyu/MICUCODELINE.git
-   cd MICUCODELINE
+   git clone https://github.com/zuoliangyu/EFlowCodeLine.git
+   cd EFlowCodeLine
    ```
 
 3. **编译项目**
@@ -45,17 +45,17 @@ MicuCodeLine 是一个为 Claude Code 设计的高性能状态栏工具，专为
 4. **复制可执行文件**
    ```bash
    # 创建配置目录
-   mkdir %USERPROFILE%\.claude\micucodeline
+   mkdir %USERPROFILE%\.claude\eflowcodeline
 
    # 复制可执行文件
-   copy target\release\micucodeline.exe %USERPROFILE%\.claude\micucodeline\
+   copy target\release\eflowcodeline.exe %USERPROFILE%\.claude\eflowcodeline\
    ```
 
 ### 方法二：从 Release 下载
 
-1. 访问 https://github.com/zuoliangyu/MICUCODELINE/releases
-2. 下载最新的 `micucodeline-windows-x64.zip`
-3. 解压到 `%USERPROFILE%\.claude\micucodeline\` 目录
+1. 访问 https://github.com/zuoliangyu/EFlowCodeLine/releases
+2. 下载最新的 `eflowcodeline-windows-x64.zip`
+3. 解压到 `%USERPROFILE%\.claude\eflowcodeline\` 目录
 
 ## 配置说明
 
@@ -64,12 +64,12 @@ MicuCodeLine 是一个为 Claude Code 设计的高性能状态栏工具，专为
 打开命令提示符或 PowerShell，运行：
 
 ```bash
-%USERPROFILE%\.claude\micucodeline\micucodeline.exe --init
+%USERPROFILE%\.claude\eflowcodeline\eflowcodeline.exe --init
 ```
 
 这将创建：
-- `%USERPROFILE%\.claude\micucodeline\config.toml` - 主配置文件
-- `%USERPROFILE%\.claude\micucodeline\themes\` - 主题目录
+- `%USERPROFILE%\.claude\eflowcodeline\config.toml` - 主配置文件
+- `%USERPROFILE%\.claude\eflowcodeline\themes\` - 主题目录
 
 ### 2. 配置 Claude Code
 
@@ -79,7 +79,7 @@ MicuCodeLine 是一个为 Claude Code 设计的高性能状态栏工具，专为
 {
   "statusLine": {
     "type": "command",
-    "command": "%USERPROFILE%\\.claude\\micucodeline\\micucodeline.exe",
+    "command": "%USERPROFILE%\\.claude\\eflowcodeline\\eflowcodeline.exe",
     "padding": 0
   }
 }
@@ -95,14 +95,14 @@ MicuCodeLine 是一个为 Claude Code 设计的高性能状态栏工具，专为
 {
   "env": {
     "ANTHROPIC_AUTH_TOKEN": "你的认证令牌",
-    "ANTHROPIC_BASE_URL": "https://www.openclaudecode.cn",
+    "ANTHROPIC_BASE_URL": "https://e-flowcode.cc",
     "BALANCE_API_KEY": "你的系统访问令牌",
     "BALANCE_API_USER": "你的用户ID",
-    "BALANCE_API_URL": "https://www.openclaudecode.cn/api/user/self"
+    "BALANCE_API_URL": "https://e-flowcode.cc/api/user/self"
   },
   "statusLine": {
     "type": "command",
-    "command": "%USERPROFILE%\\.claude\\micucodeline\\micucodeline.exe",
+    "command": "%USERPROFILE%\\.claude\\eflowcodeline\\eflowcodeline.exe",
     "padding": 0
   }
 }
@@ -111,7 +111,7 @@ MicuCodeLine 是一个为 Claude Code 设计的高性能状态栏工具，专为
 #### 获取 API 凭证
 
 1. **系统访问令牌 (BALANCE_API_KEY)**
-   - 登录 https://www.openclaudecode.cn
+   - 登录 https://e-flowcode.cc
    - 进入：控制台 → 个人设置 → 安全设置 → 系统访问令牌
    - 点击"生成令牌"并复制
 
@@ -120,11 +120,11 @@ MicuCodeLine 是一个为 Claude Code 设计的高性能状态栏工具，专为
    - 查看昵称下方的 ID 数字
 
 3. **认证令牌 (ANTHROPIC_AUTH_TOKEN)**
-   - 从 OpenClaudeCode 获取你的 API 密钥
+   - 从 EFlowCodeLine 获取你的 API 密钥
 
 ### 4. 自定义配置（可选）
 
-编辑 `%USERPROFILE%\.claude\micucodeline\config.toml` 来自定义：
+编辑 `%USERPROFILE%\.claude\eflowcodeline\config.toml` 来自定义：
 
 ```toml
 # 主题设置
@@ -154,27 +154,27 @@ error = "#FF5555"
 
 ```bash
 # 显示帮助信息
-micucodeline --help
+eflowcodeline --help
 
 # 初始化配置
-micucodeline --init
+eflowcodeline --init
 
 # 检查配置是否正确
-micucodeline --check
+eflowcodeline --check
 
 # 打印当前配置
-micucodeline --print
+eflowcodeline --print
 
 # 打开交互式配置界面
-micucodeline --config
+eflowcodeline --config
 
 # 使用指定主题运行
-micucodeline --theme nord
+eflowcodeline --theme nord
 ```
 
 ### 交互式配置界面
 
-运行 `micucodeline --config` 进入 TUI 配置界面：
+运行 `eflowcodeline --config` 进入 TUI 配置界面：
 
 - **↑/↓** - 导航菜单
 - **Enter** - 选择选项
@@ -201,7 +201,7 @@ micucodeline --theme nord
 
 #### 自定义主题
 
-1. 在 `%USERPROFILE%\.claude\micucodeline\themes\` 创建新的 `.toml` 文件
+1. 在 `%USERPROFILE%\.claude\eflowcodeline\themes\` 创建新的 `.toml` 文件
 2. 定义颜色和样式
 3. 在配置中引用主题名称
 
@@ -227,29 +227,29 @@ italic = false
 ### Q: 状态栏不显示怎么办？
 
 **A:** 检查以下几点：
-1. 确认 `micucodeline.exe` 在正确的路径
+1. 确认 `eflowcodeline.exe` 在正确的路径
 2. 检查 `settings.json` 中的路径是否正确（注意反斜杠转义）
-3. 运行 `micucodeline --check` 验证配置
+3. 运行 `eflowcodeline --check` 验证配置
 4. 查看 Claude Code 的日志输出
 
 ### Q: 余额显示为 "N/A" 或不显示？
 
 **A:** 可能的原因：
 1. API 凭证配置错误 - 检查 `BALANCE_API_KEY` 和 `BALANCE_API_USER`
-2. 网络连接问题 - 确认能访问 `https://www.openclaudecode.cn`
+2. 网络连接问题 - 确认能访问 `https://e-flowcode.cc`
 3. API URL 配置错误 - 确认 `BALANCE_API_URL` 正确
 
 运行以下命令测试 API 连接：
 ```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" https://www.openclaudecode.cn/api/user/self
+curl -H "Authorization: Bearer YOUR_API_KEY" https://e-flowcode.cc/api/user/self
 ```
 
 ### Q: 如何更换主题？
 
 **A:** 三种方法：
-1. 临时切换：`micucodeline --theme nord`
+1. 临时切换：`eflowcodeline --theme nord`
 2. 永久修改：编辑 `config.toml` 中的 `theme` 字段
-3. 交互式选择：运行 `micucodeline --config` 进入配置界面
+3. 交互式选择：运行 `eflowcodeline --config` 进入配置界面
 
 ### Q: 如何禁用某些信息段？
 
@@ -268,12 +268,12 @@ branding = false     # 禁用品牌标识
 ### Q: 状态栏更新不及时？
 
 **A:** 余额信息有 5 分钟的缓存。如需立即刷新：
-1. 删除缓存文件：`%USERPROFILE%\.claude\micucodeline\cache\balance_*.json`
+1. 删除缓存文件：`%USERPROFILE%\.claude\eflowcodeline\cache\balance_*.json`
 2. 重启 Claude Code
 
 ### Q: 如何在多台电脑间同步配置？
 
-**A:** 配置文件位于 `%USERPROFILE%\.claude\micucodeline\`，可以：
+**A:** 配置文件位于 `%USERPROFILE%\.claude\eflowcodeline\`，可以：
 1. 使用云同步工具（OneDrive、Dropbox 等）
 2. 使用 Git 管理配置文件
 3. 手动复制 `config.toml` 和 `themes/` 目录
@@ -282,12 +282,12 @@ branding = false     # 禁用品牌标识
 
 ### 问题：程序无法启动
 
-**症状**：双击 `micucodeline.exe` 没有反应或闪退
+**症状**：双击 `eflowcodeline.exe` 没有反应或闪退
 
 **解决方案**：
 1. 在命令行中运行查看错误信息：
    ```bash
-   %USERPROFILE%\.claude\micucodeline\micucodeline.exe
+   %USERPROFILE%\.claude\eflowcodeline\eflowcodeline.exe
    ```
 2. 检查是否缺少 Visual C++ 运行库
 3. 确认 Windows 版本兼容性
@@ -299,11 +299,11 @@ branding = false     # 禁用品牌标识
 **解决方案**：
 1. 备份当前配置：
    ```bash
-   copy %USERPROFILE%\.claude\micucodeline\config.toml config.toml.backup
+   copy %USERPROFILE%\.claude\eflowcodeline\config.toml config.toml.backup
    ```
 2. 重新初始化：
    ```bash
-   micucodeline --init
+   eflowcodeline --init
    ```
 3. 手动恢复自定义设置
 
@@ -343,8 +343,8 @@ branding = false     # 禁用品牌标识
 如果遇到其他问题：
 
 1. **查看日志**：Claude Code 的日志可能包含错误信息
-2. **GitHub Issues**：https://github.com/zuoliangyu/MICUCODELINE/issues
-3. **官方网站**：https://www.openclaudecode.cn
+2. **GitHub Issues**：https://github.com/zuoliangyu/EFlowCodeLine/issues
+3. **官方网站**：https://e-flowcode.cc
 
 ## 更新日志
 
@@ -357,10 +357,10 @@ MIT License - 详见 `LICENSE` 文件
 ## 致谢
 
 - 原作者：Haleclipse (CCometixLine)
-- OpenClaudeCode 团队
+- EFlowCodeLine 团队
 - 所有贡献者
 
 ---
 
 **最后更新**：2026-01-17
-**版本**：1.0.9
+**版本**：0.1.0

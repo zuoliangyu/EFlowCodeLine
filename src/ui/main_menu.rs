@@ -119,7 +119,7 @@ impl MainMenu {
             (" Check Configuration", "Validate configuration file"),
             ("💰 Setup Balance API", "Configure balance API credentials"),
             (" About", "Show application information"),
-            (" Exit", "Exit MicuCodeLine"),
+            (" Exit", "Exit EFlowCodeLine"),
         ]
     }
 
@@ -207,7 +207,7 @@ impl MainMenu {
         let header_text = Text::from(vec![
             Line::from(vec![
                 Span::styled(
-                    "MicuCodeLine",
+                    "EFlowCodeLine",
                     Style::default()
                         .fg(Color::Cyan)
                         .add_modifier(Modifier::BOLD),
@@ -346,7 +346,7 @@ impl MainMenu {
             Line::from(""),
             Line::from(vec![
                 Span::styled(
-                    "MicuCodeLine ",
+                    "EFlowCodeLine ",
                     Style::default()
                         .fg(Color::Cyan)
                         .add_modifier(Modifier::BOLD),
@@ -382,7 +382,7 @@ impl MainMenu {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .title("About MicuCodeLine")
+                    .title("About EFlowCodeLine")
                     .title_style(
                         Style::default()
                             .fg(Color::Cyan)

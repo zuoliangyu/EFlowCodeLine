@@ -347,6 +347,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "eflowcodeline"
+version = "0.1.0"
+dependencies = [
+ "ansi-to-tui",
+ "ansi_term",
+ "chrono",
+ "clap",
+ "crossterm",
+ "dirs",
+ "ratatui",
+ "regex",
+ "semver",
+ "serde",
+ "serde_json",
+ "toml",
+ "ureq",
+]
+
+[[package]]
 name = "either"
 version = "1.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -682,25 +701,6 @@ name = "memchr"
 version = "2.7.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "32a282da65faaf38286cf3be983213fcf1d2e2a58700e808f83f4ea9a4804bc0"
-
-[[package]]
-name = "micucodeline"
-version = "1.0.7"
-dependencies = [
- "ansi-to-tui",
- "ansi_term",
- "chrono",
- "clap",
- "crossterm",
- "dirs",
- "ratatui",
- "regex",
- "semver",
- "serde",
- "serde_json",
- "toml",
- "ureq",
-]
 
 [[package]]
 name = "minimal-lexical"

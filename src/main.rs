@@ -1,14 +1,73 @@
-use micucodeline::cli::Cli;
-use micucodeline::config::{Config, InputData};
-use micucodeline::core::{collect_all_segments, StatusLineGenerator};
+use eflowcodeline::cli::Cli;
+use eflowcodeline::config::{Config, InputData};
+use eflowcodeline::core::{collect_all_segments, StatusLineGenerator};
 use std::io::{self, IsTerminal};
 
+/// 自动将可执行文件复制到 ~/.claude/eflowcodeline/ 目录
+fn auto_install() {
+    // 获取当前可执行文件路径
+    let current_exe = match std::env::current_exe() {
+        Ok(path) => path,
+        Err(_) => return,
+    };
+
+    // 获取目标目录
+    let target_dir = match dirs::home_dir() {
+        Some(home) => home.join(".claude").join("eflowcodeline"),
+        None => return,
+    };
+
+    // 获取目标文件路径
+    let exe_name = if cfg!(windows) {
+        "eflowcodeline.exe"
+    } else {
+        "eflowcodeline"
+    };
+    let target_path = target_dir.join(exe_name);
+
+    // 如果当前已经在目标目录运行，跳过复制
+    if current_exe.parent() == Some(target_dir.as_path()) {
+        return;
+    }
+
+    // 创建目标目录（如果不存在）
+    if let Err(_) = std::fs::create_dir_all(&target_dir) {
+        return;
+    }
+
+    // 检查是否需要复制（目标不存在或版本不同）
+    let should_copy = if target_path.exists() {
+        // 比较文件大小，如果不同则更新
+        match (std::fs::metadata(&current_exe), std::fs::metadata(&target_path)) {
+            (Ok(src_meta), Ok(dst_meta)) => src_meta.len() != dst_meta.len(),
+            _ => true,
+        }
+    } else {
+        true
+    };
+
+    if should_copy {
+        if let Ok(_) = std::fs::copy(&current_exe, &target_path) {
+            // 在 Unix 系统上设置可执行权限
+            #[cfg(unix)]
+            {
+                use std::os::unix::fs::PermissionsExt;
+                let _ = std::fs::set_permissions(&target_path, std::fs::Permissions::from_mode(0o755));
+            }
+            eprintln!("✅ 已自动安装到: {}", target_path.display());
+        }
+    }
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 自动安装到 ~/.claude/eflowcodeline/
+    auto_install();
+
     let cli = Cli::parse_args();
 
     // Handle configuration commands
     if cli.init {
-        use micucodeline::config::InitResult;
+        use eflowcodeline::config::InitResult;
         match Config::init()? {
             InitResult::Created(path) => println!("Created config at {}", path.display()),
             InitResult::AlreadyExists(path) => {
@@ -23,7 +82,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         // Apply theme override if provided
         if let Some(theme) = cli.theme {
-            config = micucodeline::ui::themes::ThemePresets::get_theme(&theme);
+            config = eflowcodeline::ui::themes::ThemePresets::get_theme(&theme);
         }
 
         config.print()?;
@@ -40,7 +99,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if cli.config {
         #[cfg(feature = "tui")]
         {
-            micucodeline::ui::run_configurator()?;
+            eflowcodeline::ui::run_configurator()?;
         }
         #[cfg(not(feature = "tui"))]
         {
@@ -64,7 +123,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Handle Claude Code patcher
     if let Some(claude_path) = cli.patch {
-        use micucodeline::utils::ClaudeCodePatcher;
+        use eflowcodeline::utils::ClaudeCodePatcher;
 
         println!("🔧 Claude Code Context Warning Disabler");
         println!("Target file: {}", claude_path);
@@ -93,7 +152,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Apply theme override if provided
     if let Some(theme) = cli.theme {
-        config = micucodeline::ui::themes::ThemePresets::get_theme(&theme);
+        config = eflowcodeline::ui::themes::ThemePresets::get_theme(&theme);
     }
 
     // Check if stdin has data
@@ -105,7 +164,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             // Try to get config path
             let config_path: Option<PathBuf> = dirs::config_dir()
-                .map(|p| p.join("micucodeline").join("config.toml"));
+                .map(|p| p.join("eflowcodeline").join("config.toml"));
 
             let is_first_run = config_path
                 .as_ref()
@@ -114,7 +173,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             if is_first_run {
                 // First-time run: show welcome message and launch API setup first
-                println!("👋 Welcome to MicuCodeLine!");
+                println!("👋 Welcome to EFlowCodeLine!");
                 println!("📝 Let's set up your API configuration...");
                 println!("");
 
@@ -122,7 +181,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 let _ = Config::init();
 
                 // Launch API balance setup first
-                micucodeline::ui::run_balance_setup()?;
+                eflowcodeline::ui::run_balance_setup()?;
                 return Ok(());
             }
         }
@@ -130,15 +189,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // No input data available, show main menu
         #[cfg(feature = "tui")]
         {
-            use micucodeline::ui::{MainMenu, MenuResult};
+            use eflowcodeline::ui::{MainMenu, MenuResult};
 
             if let Some(result) = MainMenu::run()? {
                 match result {
                     MenuResult::LaunchConfigurator => {
-                        micucodeline::ui::run_configurator()?;
+                        eflowcodeline::ui::run_configurator()?;
                     }
                     MenuResult::SetupBalance => {
-                        micucodeline::ui::run_balance_setup()?;
+                        eflowcodeline::ui::run_balance_setup()?;
                     }
                     MenuResult::InitConfig | MenuResult::CheckConfig => {
                         // These are now handled internally by the menu
@@ -153,8 +212,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         #[cfg(not(feature = "tui"))]
         {
             eprintln!("No input data provided and TUI feature is not enabled.");
-            eprintln!("Usage: echo '{{...}}' | micucodeline");
-            eprintln!("   or: micucodeline --help");
+            eprintln!("Usage: echo '{{...}}' | eflowcodeline");
+            eprintln!("   or: eflowcodeline --help");
         }
         return Ok(());
     }

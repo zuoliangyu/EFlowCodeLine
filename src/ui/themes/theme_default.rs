@@ -150,7 +150,7 @@ pub fn output_style_segment() -> SegmentConfig {
         id: SegmentId::OutputStyle,
         enabled: true,
         icon: IconConfig {
-            plain: "Ⓜ️".to_string(),
+            plain: "🔌".to_string(),
             nerd_font: "\u{f12f5}".to_string(),
         },
         colors: ColorConfig {
@@ -204,7 +204,7 @@ pub fn branding_segment() -> SegmentConfig {
         id: SegmentId::Branding,
         enabled: true,
         icon: IconConfig {
-            plain: "MICU".to_string(),
+            plain: "EFlowCode".to_string(),
             nerd_font: "".to_string(),
         },
         colors: ColorConfig {

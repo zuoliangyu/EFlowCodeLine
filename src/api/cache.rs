@@ -18,7 +18,7 @@ static IN_MEMORY_CACHE: OnceLock<Mutex<Option<InMemoryCacheEntry>>> = OnceLock::
 
 fn get_cache_dir() -> Option<PathBuf> {
     let home = dirs::home_dir()?;
-    let cache_dir = home.join(".claude").join("micucodeline").join("cache");
+    let cache_dir = home.join(".claude").join("eflowcodeline").join("cache");
     fs::create_dir_all(&cache_dir).ok()?;
     Some(cache_dir)
 }

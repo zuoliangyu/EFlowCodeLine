@@ -16,7 +16,7 @@ impl Default for ApiConfig {
         Self {
             enabled: false,
             api_key: String::new(),
-            api_url: "https://www.openclaudecode.cn/api/user/self".to_string(),
+            api_url: "https://e-flowcode.cc/api/user/self".to_string(),
             user_id: None,
         }
     }

@@ -105,11 +105,11 @@ impl PreviewComponent {
                     },
                 },
                 SegmentId::Directory => SegmentData {
-                    primary: "MicuCodeLine".to_string(),
+                    primary: "EFlowCodeLine".to_string(),
                     secondary: "".to_string(),
                     metadata: {
                         let mut map = HashMap::new();
-                        map.insert("current_dir".to_string(), "~/MicuCodeLine".to_string());
+                        map.insert("current_dir".to_string(), "~/EFlowCodeLine".to_string());
                         map
                     },
                 },
@@ -194,7 +194,7 @@ impl PreviewComponent {
                     metadata: HashMap::new(),
                 },
                 SegmentId::Branding => SegmentData {
-                    primary: "MicuCode".to_string(),
+                    primary: "EFlowCodeLine".to_string(),
                     secondary: "".to_string(),
                     metadata: HashMap::new(),
                 },
