@@ -100,11 +100,7 @@ impl BalanceData {
         let used = usage.total_usage / 100.0; // total_usage 单位是分
         let is_unlimited = total >= UNLIMITED_THRESHOLD;
 
-        let balance = if is_unlimited {
-            0.0
-        } else {
-            total - used
-        };
+        let balance = if is_unlimited { 0.0 } else { total - used };
 
         Self {
             balance,

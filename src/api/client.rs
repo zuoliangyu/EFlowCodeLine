@@ -76,7 +76,11 @@ impl ApiClient {
         }
 
         let data = resp.data.ok_or("No data in response")?;
-        Ok(BalanceData::from_user_self(&data, quota_per_unit, exchange_rate))
+        Ok(BalanceData::from_user_self(
+            &data,
+            quota_per_unit,
+            exchange_rate,
+        ))
     }
 
     pub fn get_balance(&self) -> Result<BalanceData, Box<dyn std::error::Error>> {

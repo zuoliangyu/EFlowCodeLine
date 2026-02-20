@@ -60,14 +60,16 @@ impl BalanceSegment {
         // 适用于 API Key 设置了无限额度、billing 接口返回 ∞ 的情况
         let balance_config = BalanceConfig::load();
         if let Some(ref bc) = balance_config {
-            if let (Some(ref access_token), Some(user_id)) =
-                (&bc.access_token, bc.new_api_user_id)
+            if let (Some(ref access_token), Some(user_id)) = (&bc.access_token, bc.new_api_user_id)
             {
                 let quota_per_unit = bc.quota_per_unit.unwrap_or(500_000.0);
                 let exchange_rate = bc.exchange_rate.unwrap_or(7.3);
-                if let Ok(balance) =
-                    client.get_user_self_balance(access_token, user_id, quota_per_unit, exchange_rate)
-                {
+                if let Ok(balance) = client.get_user_self_balance(
+                    access_token,
+                    user_id,
+                    quota_per_unit,
+                    exchange_rate,
+                ) {
                     cache::set_in_memory_balance(&cache_key, &balance);
                     let _ = cache::save_cached_balance(&cache_key, &balance);
                     return Ok(Some(SegmentData {
