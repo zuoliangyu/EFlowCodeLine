@@ -52,8 +52,9 @@ Windows 示例：
 ```json
 {
   "statusLine": {
-    "type": "command",
-    "command": "%USERPROFILE%\\.claude\\eflowcodeline\\eflowcodeline.exe"
+    "command": "C:/Users/zuolan/.claude/eflowcodeline/eflowcodeline.exe",
+    "padding": 0,
+    "type": "command"
   }
 }
 ```
