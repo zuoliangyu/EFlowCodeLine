@@ -24,19 +24,25 @@ impl Segment for BalanceSegment {
 
 impl BalanceSegment {
     fn try_collect(&self) -> Result<Option<SegmentData>, Box<dyn std::error::Error>> {
-        // 从配置文件读取 Balance API 配置
         use crate::config::BalanceConfig;
+        use crate::utils::credentials;
 
-        let balance_config = match BalanceConfig::load() {
-            Some(config) => config,
-            None => return Ok(None), // 配置文件不存在，返回 None
+        // 自动从 Claude Code settings 读取 API Key 和 Base URL
+        // 优先级：settings.local.json > settings.json > 系统环境变量
+        let api_key = match credentials::get_api_key() {
+            Some(k) => k,
+            None => return Ok(None), // 没有 API Key，不显示
+        };
+
+        let api_base_url = match credentials::get_api_base_url() {
+            Some(u) => u,
+            None => return Ok(None), // 没有中转站地址，不显示（官方 API 不适用）
         };
 
         let config = ApiConfig {
             enabled: true,
-            api_key: balance_config.api_key,
-            api_url: BalanceConfig::api_url(),
-            user_id: Some(balance_config.user_id),
+            api_key,
+            api_base_url,
         };
 
         let cache_key = cache::cache_key(&config);
@@ -50,7 +56,30 @@ impl BalanceSegment {
 
         let client = ApiClient::new(config);
 
-        // 先尝试调用 API 获取最新数据
+        // 优先尝试用户 access_token 查询真实账户余额
+        // 适用于 API Key 设置了无限额度、billing 接口返回 ∞ 的情况
+        let balance_config = BalanceConfig::load();
+        if let Some(ref bc) = balance_config {
+            if let (Some(ref access_token), Some(user_id)) =
+                (&bc.access_token, bc.new_api_user_id)
+            {
+                let quota_per_unit = bc.quota_per_unit.unwrap_or(500_000.0);
+                let exchange_rate = bc.exchange_rate.unwrap_or(7.3);
+                if let Ok(balance) =
+                    client.get_user_self_balance(access_token, user_id, quota_per_unit, exchange_rate)
+                {
+                    cache::set_in_memory_balance(&cache_key, &balance);
+                    let _ = cache::save_cached_balance(&cache_key, &balance);
+                    return Ok(Some(SegmentData {
+                        primary: balance.format_display(),
+                        secondary: String::new(),
+                        metadata: HashMap::new(),
+                    }));
+                }
+            }
+        }
+
+        // 回退到标准 billing 接口
         if let Ok(balance) = client.get_balance() {
             cache::set_in_memory_balance(&cache_key, &balance);
             let _ = cache::save_cached_balance(&cache_key, &balance);
@@ -61,7 +90,7 @@ impl BalanceSegment {
             }));
         }
 
-        // API 失败时，使用缓存作为 fallback
+        // API 失败时使用缓存 fallback
         let (cached, _) = cache::get_cached_balance(&cache_key);
         if let Some(balance) = cached {
             cache::set_in_memory_balance(&cache_key, &balance);
