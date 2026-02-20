@@ -166,24 +166,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         {
             use std::path::PathBuf;
 
-            // Try to get config path
-            let config_path: Option<PathBuf> =
-                dirs::config_dir().map(|p| p.join("eflowcodeline").join("config.toml"));
+            // Try to get config path (使用与 Config::get_config_path() 相同的路径)
+            let config_path: Option<PathBuf> = dirs::home_dir()
+                .map(|p| p.join(".claude").join("eflowcodeline").join("config.toml"));
 
             let is_first_run = config_path.as_ref().map(|p| !p.exists()).unwrap_or(false);
 
             if is_first_run {
-                // First-time run: show welcome message and launch API setup first
-                println!("👋 Welcome to EFlowCodeLine!");
-                println!("📝 Let's set up your API configuration...");
-                println!("");
-
-                // Initialize config directory and themes
+                // First-time run: silently initialize config and continue to main menu
                 let _ = Config::init();
-
-                // Launch API balance setup first
-                eflowcodeline::ui::run_balance_setup()?;
-                return Ok(());
             }
         }
 
@@ -197,16 +188,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     MenuResult::LaunchConfigurator => {
                         eflowcodeline::ui::run_configurator()?;
                     }
-                    MenuResult::SetupBalance => {
-                        eflowcodeline::ui::run_balance_setup()?;
-                    }
                     MenuResult::InitConfig | MenuResult::CheckConfig => {
-                        // These are now handled internally by the menu
-                        // and should not be returned, but handle gracefully
+                        // Handled internally by the menu
                     }
-                    MenuResult::Exit => {
-                        // Exit gracefully
-                    }
+                    MenuResult::Exit => {}
                 }
             }
         }
