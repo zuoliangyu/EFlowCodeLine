@@ -31,7 +31,7 @@ fn auto_install() {
     }
 
     // 创建目标目录（如果不存在）
-    if let Err(_) = std::fs::create_dir_all(&target_dir) {
+    if std::fs::create_dir_all(&target_dir).is_err() {
         return;
     }
 
@@ -50,7 +50,7 @@ fn auto_install() {
     };
 
     if should_copy {
-        if let Ok(_) = std::fs::copy(&current_exe, &target_path) {
+        if std::fs::copy(&current_exe, &target_path).is_ok() {
             // 在 Unix 系统上设置可执行权限
             #[cfg(unix)]
             {
