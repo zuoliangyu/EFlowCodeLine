@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   build:
@@ -110,3 +111,81 @@ jobs:
         body_path: RELEASE_NOTES.md
         draft: false
         prerelease: false
+
+    - name: Setup Node.js for NPM
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Extract binaries from archives
+      run: |
+        mkdir -p extracted
+
+        # macOS x64
+        tar -xzf artifacts/eflowcodeline-macos-x64.tar.gz/eflowcodeline-macos-x64.tar.gz -C extracted
+        mv extracted/eflowcodeline extracted/eflowcodeline-darwin-x64
+
+        # macOS ARM64
+        tar -xzf artifacts/eflowcodeline-macos-arm64.tar.gz/eflowcodeline-macos-arm64.tar.gz -C extracted
+        mv extracted/eflowcodeline extracted/eflowcodeline-darwin-arm64
+
+        # Linux x64
+        tar -xzf artifacts/eflowcodeline-linux-x64.tar.gz/eflowcodeline-linux-x64.tar.gz -C extracted
+        mv extracted/eflowcodeline extracted/eflowcodeline-linux-x64
+
+        # Linux musl (static)
+        tar -xzf artifacts/eflowcodeline-linux-x64-static.tar.gz/eflowcodeline-linux-x64-static.tar.gz -C extracted
+        mv extracted/eflowcodeline extracted/eflowcodeline-linux-x64-musl
+
+        # Windows
+        unzip artifacts/eflowcodeline-windows-x64.zip/eflowcodeline-windows-x64.zip -d extracted
+        mv extracted/eflowcodeline.exe extracted/eflowcodeline-win32-x64.exe
+
+        ls -la extracted/
+
+    - name: Prepare NPM packages
+      run: |
+        node npm/scripts/prepare-packages.js
+
+        cp extracted/eflowcodeline-darwin-x64 npm-publish/darwin-x64/eflowcodeline
+        cp extracted/eflowcodeline-darwin-arm64 npm-publish/darwin-arm64/eflowcodeline
+        cp extracted/eflowcodeline-linux-x64 npm-publish/linux-x64/eflowcodeline
+        cp extracted/eflowcodeline-linux-x64-musl npm-publish/linux-x64-musl/eflowcodeline
+        cp extracted/eflowcodeline-win32-x64.exe npm-publish/win32-x64/eflowcodeline.exe
+
+        chmod +x npm-publish/darwin-x64/eflowcodeline
+        chmod +x npm-publish/darwin-arm64/eflowcodeline
+        chmod +x npm-publish/linux-x64/eflowcodeline
+        chmod +x npm-publish/linux-x64-musl/eflowcodeline
+
+        find npm-publish -name "package.json" -exec echo "=== {} ===" \; -exec head -5 {} \;
+
+    - name: Publish platform packages to NPM
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        for platform in darwin-x64 darwin-arm64 linux-x64 linux-x64-musl win32-x64; do
+          echo "📦 Publishing @haleclipse/eflowcodeline-$platform"
+          cd npm-publish/$platform
+          npm publish --access public
+          cd ../..
+          echo "✅ Published @haleclipse/eflowcodeline-$platform"
+        done
+
+    - name: Wait for NPM registry
+      run: |
+        echo "⏳ Waiting for platform packages to be available on NPM..."
+        sleep 30
+
+    - name: Publish main package to NPM
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        cd npm-publish/main
+        echo "📦 Publishing @haleclipse/eflowcodeline"
+        npm publish --access public
+        echo "✅ Published @haleclipse/eflowcodeline"
+        echo ""
+        echo "🎉 NPM packages published successfully!"
+        echo "Install with: npm install -g @haleclipse/eflowcodeline"
