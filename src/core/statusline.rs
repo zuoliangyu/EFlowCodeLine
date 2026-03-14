@@ -377,7 +377,11 @@ impl StatusLineGenerator {
                 config.styles.text_bold,
             );
 
-            let mut segment = format!("{} {}", icon_colored, text_styled);
+            let mut segment = if data.primary.is_empty() {
+                icon_colored
+            } else {
+                format!("{} {}", icon_colored, text_styled)
+            };
 
             if !data.secondary.is_empty() {
                 segment.push_str(&format!(
@@ -631,7 +635,13 @@ pub fn collect_all_segments(
                 segment.collect(input)
             }
             crate::config::SegmentId::Branding => {
-                let segment = BrandingSegment::new();
+                let text = segment_config
+                    .options
+                    .get("text")
+                    .and_then(|v| v.as_str())
+                    .unwrap_or("")
+                    .to_string();
+                let segment = BrandingSegment::new().with_text(text);
                 segment.collect(input)
             }
         };
