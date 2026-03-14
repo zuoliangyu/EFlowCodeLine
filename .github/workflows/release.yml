@@ -166,11 +166,11 @@ jobs:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
         for platform in darwin-x64 darwin-arm64 linux-x64 linux-x64-musl win32-x64; do
-          echo "📦 Publishing @haleclipse/eflowcodeline-$platform"
+          echo "📦 Publishing @zuolan/eflowcodeline-$platform"
           cd npm-publish/$platform
           npm publish --access public
           cd ../..
-          echo "✅ Published @haleclipse/eflowcodeline-$platform"
+          echo "✅ Published @zuolan/eflowcodeline-$platform"
         done
 
     - name: Wait for NPM registry
@@ -183,9 +183,9 @@ jobs:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
         cd npm-publish/main
-        echo "📦 Publishing @haleclipse/eflowcodeline"
+        echo "📦 Publishing @zuolan/eflowcodeline"
         npm publish --access public
-        echo "✅ Published @haleclipse/eflowcodeline"
+        echo "✅ Published @zuolan/eflowcodeline"
         echo ""
         echo "🎉 NPM packages published successfully!"
-        echo "Install with: npm install -g @haleclipse/eflowcodeline"
+        echo "Install with: npm install -g @zuolan/eflowcodeline"

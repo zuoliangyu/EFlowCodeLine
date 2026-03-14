@@ -1,5 +1,5 @@
 {
-  "name": "@haleclipse/eflowcodeline-linux-x64",
+  "name": "@zuolan/eflowcodeline-linux-x64",
   "version": "1.4.0",
   "description": "Linux x64 binary for EFlowCodeLine",
   "files": ["eflowcodeline"],
@@ -9,6 +9,6 @@
     "type": "git",
     "url": "https://github.com/zuoliangyu/EFlowCodeLine"
   },
-  "author": "Haleclipse",
+  "author": "zuolan",
   "license": "MIT"
 }

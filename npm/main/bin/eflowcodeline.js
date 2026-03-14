@@ -58,12 +58,12 @@ if (platform === 'linux') {
 }
 
 const packageMap = {
-  'darwin-x64': '@haleclipse/eflowcodeline-darwin-x64',
-  'darwin-arm64': '@haleclipse/eflowcodeline-darwin-arm64',
-  'linux-x64': '@haleclipse/eflowcodeline-linux-x64',
-  'linux-x64-musl': '@haleclipse/eflowcodeline-linux-x64-musl',
-  'win32-x64': '@haleclipse/eflowcodeline-win32-x64',
-  'win32-ia32': '@haleclipse/eflowcodeline-win32-x64', // Use 64-bit for 32-bit systems
+  'darwin-x64': '@zuolan/eflowcodeline-darwin-x64',
+  'darwin-arm64': '@zuolan/eflowcodeline-darwin-arm64',
+  'linux-x64': '@zuolan/eflowcodeline-linux-x64',
+  'linux-x64-musl': '@zuolan/eflowcodeline-linux-x64-musl',
+  'win32-x64': '@zuolan/eflowcodeline-win32-x64',
+  'win32-ia32': '@zuolan/eflowcodeline-win32-x64', // Use 64-bit for 32-bit systems
 };
 
 const packageName = packageMap[platformKey];
@@ -80,7 +80,7 @@ const binaryPath = path.join(__dirname, '..', 'node_modules', packageName, binar
 if (!fs.existsSync(binaryPath)) {
   console.error(`Error: Binary not found at ${binaryPath}`);
   console.error('This might indicate a failed installation or unsupported platform.');
-  console.error('Please try reinstalling: npm install -g @haleclipse/eflowcodeline');
+  console.error('Please try reinstalling: npm install -g @zuolan/eflowcodeline');
   console.error(`Expected package: ${packageName}`);
   process.exit(1);
 }

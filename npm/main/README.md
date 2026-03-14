@@ -1,6 +1,6 @@
 # EFlowCodeLine
 
-[![npm version](https://img.shields.io/npm/v/@haleclipse/eflowcodeline)](https://www.npmjs.com/package/@haleclipse/eflowcodeline)
+[![npm version](https://img.shields.io/npm/v/@zuolan/eflowcodeline)](https://www.npmjs.com/package/@zuolan/eflowcodeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 EFlowCodeLine 是 **EFlowCode 专用版** Claude Code 状态栏工具，Rust 编写，支持余额显示、多主题、TUI 配置面板以及智能终端宽度换行。
@@ -10,7 +10,7 @@ EFlowCodeLine 是 **EFlowCode 专用版** Claude Code 状态栏工具，Rust 编
 ## 安装
 
 ```bash
-npm install -g @haleclipse/eflowcodeline
+npm install -g @zuolan/eflowcodeline
 ```
 
 安装完成后会自动：
@@ -61,11 +61,11 @@ context_limit = 128000
 
 | 平台 | 包名 |
 |------|------|
-| macOS x64 | `@haleclipse/eflowcodeline-darwin-x64` |
-| macOS arm64 | `@haleclipse/eflowcodeline-darwin-arm64` |
-| Linux x64 | `@haleclipse/eflowcodeline-linux-x64` |
-| Linux x64 (musl) | `@haleclipse/eflowcodeline-linux-x64-musl` |
-| Windows x64 | `@haleclipse/eflowcodeline-win32-x64` |
+| macOS x64 | `@zuolan/eflowcodeline-darwin-x64` |
+| macOS arm64 | `@zuolan/eflowcodeline-darwin-arm64` |
+| Linux x64 | `@zuolan/eflowcodeline-linux-x64` |
+| Linux x64 (musl) | `@zuolan/eflowcodeline-linux-x64-musl` |
+| Windows x64 | `@zuolan/eflowcodeline-win32-x64` |
 
 ## License
 

@@ -53,12 +53,12 @@ try {
   }
 
   const packageMap = {
-    'darwin-x64': '@haleclipse/eflowcodeline-darwin-x64',
-    'darwin-arm64': '@haleclipse/eflowcodeline-darwin-arm64',
-    'linux-x64': '@haleclipse/eflowcodeline-linux-x64',
-    'linux-x64-musl': '@haleclipse/eflowcodeline-linux-x64-musl',
-    'win32-x64': '@haleclipse/eflowcodeline-win32-x64',
-    'win32-ia32': '@haleclipse/eflowcodeline-win32-x64', // Use 64-bit for 32-bit
+    'darwin-x64': '@zuolan/eflowcodeline-darwin-x64',
+    'darwin-arm64': '@zuolan/eflowcodeline-darwin-arm64',
+    'linux-x64': '@zuolan/eflowcodeline-linux-x64',
+    'linux-x64-musl': '@zuolan/eflowcodeline-linux-x64-musl',
+    'win32-x64': '@zuolan/eflowcodeline-win32-x64',
+    'win32-ia32': '@zuolan/eflowcodeline-win32-x64', // Use 64-bit for 32-bit
   };
 
   const packageName = packageMap[platformKey];

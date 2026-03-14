@@ -42,7 +42,7 @@ platforms.forEach(platform => {
     JSON.stringify(packageJson, null, 2) + '\n'
   );
 
-  console.log(`✓ Prepared @haleclipse/eflowcodeline-${platform} v${version}`);
+  console.log(`✓ Prepared @zuolan/eflowcodeline-${platform} v${version}`);
 });
 
 // Prepare main package
@@ -61,7 +61,7 @@ mainPackageJson.version = version;
 // Update optionalDependencies versions
 if (mainPackageJson.optionalDependencies) {
   Object.keys(mainPackageJson.optionalDependencies).forEach(dep => {
-    if (dep.startsWith('@haleclipse/eflowcodeline-')) {
+    if (dep.startsWith('@zuolan/eflowcodeline-')) {
       mainPackageJson.optionalDependencies[dep] = version;
     }
   });
@@ -72,7 +72,7 @@ fs.writeFileSync(
   JSON.stringify(mainPackageJson, null, 2) + '\n'
 );
 
-console.log(`✓ Prepared @haleclipse/eflowcodeline v${version}`);
+console.log(`✓ Prepared @zuolan/eflowcodeline v${version}`);
 console.log(`\n🎉 All packages prepared for version ${version}`);
 console.log('\nNext steps:');
 console.log('1. Copy binaries to platform directories');

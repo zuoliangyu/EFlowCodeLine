@@ -1,5 +1,5 @@
 {
-  "name": "@haleclipse/eflowcodeline",
+  "name": "@zuolan/eflowcodeline",
   "version": "1.4.0",
   "description": "EFlowCodeLine - High-performance Claude Code StatusLine tool",
   "bin": {
@@ -9,11 +9,11 @@
     "postinstall": "node scripts/postinstall.js"
   },
   "optionalDependencies": {
-    "@haleclipse/eflowcodeline-darwin-x64": "1.4.0",
-    "@haleclipse/eflowcodeline-darwin-arm64": "1.4.0",
-    "@haleclipse/eflowcodeline-linux-x64": "1.4.0",
-    "@haleclipse/eflowcodeline-linux-x64-musl": "1.4.0",
-    "@haleclipse/eflowcodeline-win32-x64": "1.4.0"
+    "@zuolan/eflowcodeline-darwin-x64": "1.4.0",
+    "@zuolan/eflowcodeline-darwin-arm64": "1.4.0",
+    "@zuolan/eflowcodeline-linux-x64": "1.4.0",
+    "@zuolan/eflowcodeline-linux-x64-musl": "1.4.0",
+    "@zuolan/eflowcodeline-win32-x64": "1.4.0"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "rust",
     "cli"
   ],
-  "author": "Haleclipse",
+  "author": "zuolan",
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
