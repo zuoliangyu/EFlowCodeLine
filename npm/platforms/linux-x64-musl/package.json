@@ -1,0 +1,14 @@
+{
+  "name": "@haleclipse/eflowcodeline-linux-x64-musl",
+  "version": "1.4.0",
+  "description": "Linux x64 musl static binary for EFlowCodeLine",
+  "files": ["eflowcodeline"],
+  "os": ["linux"],
+  "cpu": ["x64"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zuoliangyu/EFlowCodeLine"
+  },
+  "author": "Haleclipse",
+  "license": "MIT"
+}
