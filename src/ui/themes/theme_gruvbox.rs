@@ -204,7 +204,7 @@ pub fn branding_segment() -> SegmentConfig {
         id: SegmentId::Branding,
         enabled: false,
         icon: IconConfig {
-            plain: "".to_string(),
+            plain: "EFLOWCODE".to_string(),
             nerd_font: "".to_string(),
         },
         colors: ColorConfig {

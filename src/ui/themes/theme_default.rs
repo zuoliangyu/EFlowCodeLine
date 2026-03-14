@@ -148,7 +148,7 @@ pub fn session_segment() -> SegmentConfig {
 pub fn output_style_segment() -> SegmentConfig {
     SegmentConfig {
         id: SegmentId::OutputStyle,
-        enabled: true,
+        enabled: false,
         icon: IconConfig {
             plain: "🔌".to_string(),
             nerd_font: "\u{f12f5}".to_string(),
@@ -184,7 +184,7 @@ pub fn balance_segment() -> SegmentConfig {
 pub fn group_segment() -> SegmentConfig {
     SegmentConfig {
         id: SegmentId::Group,
-        enabled: true,
+        enabled: false,
         icon: IconConfig {
             plain: "👤".to_string(),
             nerd_font: "\u{f0c0}".to_string(),
@@ -204,7 +204,7 @@ pub fn branding_segment() -> SegmentConfig {
         id: SegmentId::Branding,
         enabled: true,
         icon: IconConfig {
-            plain: "EFlowCode".to_string(),
+            plain: "EFLOWCODE".to_string(),
             nerd_font: "".to_string(),
         },
         colors: ColorConfig {
