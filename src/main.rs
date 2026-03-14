@@ -96,8 +96,7 @@ fn auto_install() {
         #[cfg(unix)]
         {
             use std::os::unix::fs::PermissionsExt;
-            let _ =
-                std::fs::set_permissions(&target_path, std::fs::Permissions::from_mode(0o755));
+            let _ = std::fs::set_permissions(&target_path, std::fs::Permissions::from_mode(0o755));
         }
         eprintln!("✅ 已自动安装到: {}", target_path.display());
     }
