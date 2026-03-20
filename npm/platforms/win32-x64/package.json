@@ -1,6 +1,6 @@
 {
   "name": "@zuolan/eflowcodeline-win32-x64",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Windows x64 binary for EFlowCodeLine",
   "files": ["eflowcodeline.exe"],
   "os": ["win32"],

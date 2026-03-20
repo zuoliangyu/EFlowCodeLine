@@ -1,6 +1,6 @@
 {
   "name": "@zuolan/eflowcodeline-linux-arm64-musl",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Linux ARM64 static (musl) binary for EFlowCodeLine",
   "files": ["eflowcodeline"],
   "os": ["linux"],

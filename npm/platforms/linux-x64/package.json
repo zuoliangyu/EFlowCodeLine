@@ -1,6 +1,6 @@
 {
   "name": "@zuolan/eflowcodeline-linux-x64",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Linux x64 binary for EFlowCodeLine",
   "files": ["eflowcodeline"],
   "os": ["linux"],
