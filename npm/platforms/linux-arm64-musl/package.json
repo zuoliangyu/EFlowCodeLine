@@ -1,10 +1,10 @@
 {
-  "name": "@zuolan/eflowcodeline-linux-x64",
+  "name": "@zuolan/eflowcodeline-linux-arm64-musl",
   "version": "1.5.1",
-  "description": "Linux x64 binary for EFlowCodeLine",
+  "description": "Linux ARM64 static (musl) binary for EFlowCodeLine",
   "files": ["eflowcodeline"],
   "os": ["linux"],
-  "cpu": ["x64"],
+  "cpu": ["arm64"],
   "repository": {
     "type": "git",
     "url": "https://github.com/zuoliangyu/EFlowCodeLine"

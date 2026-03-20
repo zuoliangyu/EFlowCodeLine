@@ -27,6 +27,10 @@ const arch = process.arch;
 // Handle special cases
 let platformKey = `${platform}-${arch}`;
 if (platform === 'linux') {
+  // Map Node.js arch names to package keys
+  const archMap = { 'x64': 'x64', 'arm64': 'arm64', 'arm': 'armv7' };
+  const archKey = archMap[arch] || arch;
+
   // Detect if static linking is needed based on glibc version
   function shouldUseStaticBinary() {
     try {
@@ -52,8 +56,12 @@ if (platform === 'linux') {
     return false;
   }
 
-  if (shouldUseStaticBinary()) {
-    platformKey = 'linux-x64-musl';
+  if (archKey === 'armv7') {
+    platformKey = 'linux-armv7';
+  } else if (shouldUseStaticBinary()) {
+    platformKey = `linux-${archKey}-musl`;
+  } else {
+    platformKey = `linux-${archKey}`;
   }
 }
 
@@ -62,6 +70,9 @@ const packageMap = {
   'darwin-arm64': '@zuolan/eflowcodeline-darwin-arm64',
   'linux-x64': '@zuolan/eflowcodeline-linux-x64',
   'linux-x64-musl': '@zuolan/eflowcodeline-linux-x64-musl',
+  'linux-arm64': '@zuolan/eflowcodeline-linux-arm64',
+  'linux-arm64-musl': '@zuolan/eflowcodeline-linux-arm64-musl',
+  'linux-armv7': '@zuolan/eflowcodeline-linux-armv7',
   'win32-x64': '@zuolan/eflowcodeline-win32-x64',
   'win32-ia32': '@zuolan/eflowcodeline-win32-x64', // Use 64-bit for 32-bit systems
 };
@@ -69,7 +80,7 @@ const packageMap = {
 const packageName = packageMap[platformKey];
 if (!packageName) {
   console.error(`Error: Unsupported platform ${platformKey}`);
-  console.error('Supported platforms: darwin (x64/arm64), linux (x64), win32 (x64)');
+  console.error('Supported platforms: darwin (x64/arm64), linux (x64/arm64/armv7), win32 (x64)');
   console.error('Please visit https://github.com/zuoliangyu/EFlowCodeLine for manual installation');
   process.exit(1);
 }

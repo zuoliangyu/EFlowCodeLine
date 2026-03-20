@@ -1,6 +1,6 @@
 {
   "name": "@zuolan/eflowcodeline",
-  "version": "1.4.0",
+  "version": "1.5.1",
   "description": "EFlowCodeLine - High-performance Claude Code StatusLine tool",
   "bin": {
     "eflowcodeline": "bin/eflowcodeline.js"
@@ -9,11 +9,14 @@
     "postinstall": "node scripts/postinstall.js"
   },
   "optionalDependencies": {
-    "@zuolan/eflowcodeline-darwin-x64": "1.4.0",
-    "@zuolan/eflowcodeline-darwin-arm64": "1.4.0",
-    "@zuolan/eflowcodeline-linux-x64": "1.4.0",
-    "@zuolan/eflowcodeline-linux-x64-musl": "1.4.0",
-    "@zuolan/eflowcodeline-win32-x64": "1.4.0"
+    "@zuolan/eflowcodeline-darwin-x64": "1.5.1",
+    "@zuolan/eflowcodeline-darwin-arm64": "1.5.1",
+    "@zuolan/eflowcodeline-linux-x64": "1.5.1",
+    "@zuolan/eflowcodeline-linux-x64-musl": "1.5.1",
+    "@zuolan/eflowcodeline-linux-arm64": "1.5.1",
+    "@zuolan/eflowcodeline-linux-arm64-musl": "1.5.1",
+    "@zuolan/eflowcodeline-linux-armv7": "1.5.1",
+    "@zuolan/eflowcodeline-win32-x64": "1.5.1"
   },
   "repository": {
     "type": "git",

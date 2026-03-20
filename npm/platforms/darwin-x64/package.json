@@ -1,6 +1,6 @@
 {
   "name": "@zuolan/eflowcodeline-darwin-x64",
-  "version": "1.4.0",
+  "version": "1.5.1",
   "description": "macOS x64 binary for EFlowCodeLine",
   "files": ["eflowcodeline"],
   "os": ["darwin"],

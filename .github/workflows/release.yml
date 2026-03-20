@@ -23,6 +23,18 @@ jobs:
           - target: x86_64-unknown-linux-musl
             os: ubuntu-latest
             name: eflowcodeline-linux-x64-static.tar.gz
+          - target: aarch64-unknown-linux-gnu
+            os: ubuntu-latest
+            name: eflowcodeline-linux-arm64.tar.gz
+            use_cross: true
+          - target: aarch64-unknown-linux-musl
+            os: ubuntu-latest
+            name: eflowcodeline-linux-arm64-static.tar.gz
+            use_cross: true
+          - target: armv7-unknown-linux-gnueabihf
+            os: ubuntu-latest
+            name: eflowcodeline-linux-armv7.tar.gz
+            use_cross: true
           - target: x86_64-pc-windows-gnu
             os: ubuntu-latest
             name: eflowcodeline-windows-x64.zip
@@ -54,7 +66,16 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y musl-tools
 
-    - name: Build binary
+    - name: Install cross
+      if: matrix.use_cross
+      run: cargo install cross --git https://github.com/cross-rs/cross
+
+    - name: Build binary (cross)
+      if: matrix.use_cross
+      run: cross build --release --target ${{ matrix.target }}
+
+    - name: Build binary (cargo)
+      if: ${{ !matrix.use_cross }}
       run: cargo build --release --target ${{ matrix.target }}
 
     - name: Package Linux/macOS
@@ -138,6 +159,18 @@ jobs:
         tar -xzf artifacts/eflowcodeline-linux-x64-static.tar.gz/eflowcodeline-linux-x64-static.tar.gz -C extracted
         mv extracted/eflowcodeline extracted/eflowcodeline-linux-x64-musl
 
+        # Linux ARM64
+        tar -xzf artifacts/eflowcodeline-linux-arm64.tar.gz/eflowcodeline-linux-arm64.tar.gz -C extracted
+        mv extracted/eflowcodeline extracted/eflowcodeline-linux-arm64
+
+        # Linux ARM64 musl (static)
+        tar -xzf artifacts/eflowcodeline-linux-arm64-static.tar.gz/eflowcodeline-linux-arm64-static.tar.gz -C extracted
+        mv extracted/eflowcodeline extracted/eflowcodeline-linux-arm64-musl
+
+        # Linux ARMv7
+        tar -xzf artifacts/eflowcodeline-linux-armv7.tar.gz/eflowcodeline-linux-armv7.tar.gz -C extracted
+        mv extracted/eflowcodeline extracted/eflowcodeline-linux-armv7
+
         # Windows
         unzip artifacts/eflowcodeline-windows-x64.zip/eflowcodeline-windows-x64.zip -d extracted
         mv extracted/eflowcodeline.exe extracted/eflowcodeline-win32-x64.exe
@@ -152,12 +185,18 @@ jobs:
         cp extracted/eflowcodeline-darwin-arm64 npm-publish/darwin-arm64/eflowcodeline
         cp extracted/eflowcodeline-linux-x64 npm-publish/linux-x64/eflowcodeline
         cp extracted/eflowcodeline-linux-x64-musl npm-publish/linux-x64-musl/eflowcodeline
+        cp extracted/eflowcodeline-linux-arm64 npm-publish/linux-arm64/eflowcodeline
+        cp extracted/eflowcodeline-linux-arm64-musl npm-publish/linux-arm64-musl/eflowcodeline
+        cp extracted/eflowcodeline-linux-armv7 npm-publish/linux-armv7/eflowcodeline
         cp extracted/eflowcodeline-win32-x64.exe npm-publish/win32-x64/eflowcodeline.exe
 
         chmod +x npm-publish/darwin-x64/eflowcodeline
         chmod +x npm-publish/darwin-arm64/eflowcodeline
         chmod +x npm-publish/linux-x64/eflowcodeline
         chmod +x npm-publish/linux-x64-musl/eflowcodeline
+        chmod +x npm-publish/linux-arm64/eflowcodeline
+        chmod +x npm-publish/linux-arm64-musl/eflowcodeline
+        chmod +x npm-publish/linux-armv7/eflowcodeline
 
         find npm-publish -name "package.json" -exec echo "=== {} ===" \; -exec head -5 {} \;
 
@@ -165,7 +204,7 @@ jobs:
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
-        for platform in darwin-x64 darwin-arm64 linux-x64 linux-x64-musl win32-x64; do
+        for platform in darwin-x64 darwin-arm64 linux-x64 linux-x64-musl linux-arm64 linux-arm64-musl linux-armv7 win32-x64; do
           echo "📦 Publishing @zuolan/eflowcodeline-$platform"
           cd npm-publish/$platform
           npm publish --access public
