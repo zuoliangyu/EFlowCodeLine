@@ -27,6 +27,9 @@ pub struct UserSelfData {
     pub quota: i64,
     #[serde(default)]
     pub used_quota: i64,
+    /// 用户所属分组名（如 default / vip / 内测组）
+    #[serde(default)]
+    pub group: Option<String>,
 }
 
 /// /api/user/self 完整响应
@@ -69,28 +72,31 @@ pub struct BalanceData {
     pub used: f64,
     pub total: f64,
     pub is_unlimited: bool,
+    /// 用户所属分组名（仅 /api/user/self 路径填充）
+    #[serde(default)]
+    pub group_name: Option<String>,
 }
 
 const UNLIMITED_THRESHOLD: f64 = 100_000_000.0;
 
 impl BalanceData {
-    /// 从 /api/user/self 响应中的原始额度计算余额
-    /// quota_per_unit: 每美元对应的额度单位（new-api 默认 500000）
-    /// exchange_rate: USD→CNY 汇率（new-api 默认 7.3）
-    pub fn from_user_self(data: &UserSelfData, quota_per_unit: f64, exchange_rate: f64) -> Self {
+    /// 从 /api/user/self 响应中的原始额度计算余额（USD）。
+    /// `quota_per_unit`：每美元对应的额度单位（new-api 默认 500000）。
+    pub fn from_user_self(data: &UserSelfData, quota_per_unit: f64) -> Self {
         let remain = data.quota as f64;
         let used = data.used_quota as f64;
         let total_raw = remain + used;
 
-        let balance = remain / quota_per_unit * exchange_rate;
-        let used_display = used / quota_per_unit * exchange_rate;
-        let total = total_raw / quota_per_unit * exchange_rate;
+        let balance = remain / quota_per_unit;
+        let used_display = used / quota_per_unit;
+        let total = total_raw / quota_per_unit;
 
         Self {
             balance,
             used: used_display,
             total,
             is_unlimited: false,
+            group_name: data.group.clone(),
         }
     }
 
@@ -107,14 +113,21 @@ impl BalanceData {
             used,
             total,
             is_unlimited,
+            group_name: None,
         }
     }
 
-    pub fn format_display(&self) -> String {
+    /// 已用额度的展示文本，固定 USD。
+    pub fn format_used(&self) -> String {
+        format!("${:.2}", self.used)
+    }
+
+    /// 余额的展示文本，无限额度时返回 ∞。
+    pub fn format_balance(&self) -> String {
         if self.is_unlimited {
             "∞".to_string()
         } else {
-            format!("¥{:.2}", self.balance)
+            format!("${:.2}", self.balance)
         }
     }
 }

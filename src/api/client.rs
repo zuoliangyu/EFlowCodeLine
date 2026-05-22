@@ -55,7 +55,6 @@ impl ApiClient {
         access_token: &str,
         user_id: i64,
         quota_per_unit: f64,
-        exchange_rate: f64,
     ) -> Result<BalanceData, Box<dyn std::error::Error>> {
         let url = format!(
             "{}/api/user/self",
@@ -76,11 +75,7 @@ impl ApiClient {
         }
 
         let data = resp.data.ok_or("No data in response")?;
-        Ok(BalanceData::from_user_self(
-            &data,
-            quota_per_unit,
-            exchange_rate,
-        ))
+        Ok(BalanceData::from_user_self(&data, quota_per_unit))
     }
 
     pub fn get_balance(&self) -> Result<BalanceData, Box<dyn std::error::Error>> {
