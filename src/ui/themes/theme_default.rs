@@ -12,20 +12,17 @@ pub fn model_segment() -> SegmentConfig {
             nerd_font: "\u{e26d}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 42,
                 g: 56,
                 b: 110,
@@ -45,20 +42,17 @@ pub fn context_window_segment() -> SegmentConfig {
             nerd_font: "\u{f49b}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 68,
                 g: 95,
                 b: 167,
@@ -78,20 +72,17 @@ pub fn usage_segment() -> SegmentConfig {
             nerd_font: "\u{f0a9e}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 92,
                 g: 124,
                 b: 192,
@@ -111,20 +102,17 @@ pub fn cost_segment() -> SegmentConfig {
             nerd_font: "\u{eec1}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 188,
                 g: 121,
                 b: 196,
@@ -144,20 +132,17 @@ pub fn session_segment() -> SegmentConfig {
             nerd_font: "\u{f19bb}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 220,
                 g: 99,
                 b: 134,
@@ -177,20 +162,17 @@ pub fn output_style_segment() -> SegmentConfig {
             nerd_font: "\u{f12f5}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 228,
                 g: 134,
                 b: 78,
@@ -210,20 +192,17 @@ pub fn cwd_segment() -> SegmentConfig {
             nerd_font: "\u{f024b}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 43,
                 g: 60,
                 b: 95,
@@ -243,20 +222,17 @@ pub fn directory_segment() -> SegmentConfig {
             nerd_font: "\u{f024b}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 63,
                 g: 86,
                 b: 142,
@@ -276,20 +252,17 @@ pub fn git_segment() -> SegmentConfig {
             nerd_font: "\u{f02a2}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 87,
                 g: 114,
                 b: 175,
@@ -309,20 +282,17 @@ pub fn used_segment() -> SegmentConfig {
             nerd_font: "\u{f155}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 184,
                 g: 102,
                 b: 169,
@@ -342,20 +312,17 @@ pub fn balance_segment() -> SegmentConfig {
             nerd_font: "\u{f0d6}".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 245,
                 b: 245,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 218,
                 g: 159,
                 b: 86,
@@ -375,20 +342,17 @@ pub fn branding_segment() -> SegmentConfig {
             nerd_font: "EFLOWCODE".to_string(),
         },
         colors: ColorConfig {
-            icon:
-            Some(AnsiColor::Rgb {
+            icon: Some(AnsiColor::Rgb {
                 r: 30,
                 g: 30,
                 b: 30,
             }),
-            text:
-            Some(AnsiColor::Rgb {
+            text: Some(AnsiColor::Rgb {
                 r: 30,
                 g: 30,
                 b: 30,
             }),
-            background:
-            Some(AnsiColor::Rgb {
+            background: Some(AnsiColor::Rgb {
                 r: 245,
                 g: 213,
                 b: 96,

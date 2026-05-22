@@ -547,7 +547,7 @@ impl StatusLineGenerator {
         let mut out = String::new();
         out.push_str(&rendered_segments[0]);
 
-        for i in 1..rendered_segments.len() {
+        for (i, segment) in rendered_segments.iter().enumerate().skip(1) {
             // Insert newline before any forced-break segment so the row breaks cleanly.
             let force_break = segment_configs
                 .get(i)
@@ -569,7 +569,7 @@ impl StatusLineGenerator {
                 out.push_str(&white_separator);
             }
 
-            out.push_str(&rendered_segments[i]);
+            out.push_str(segment);
         }
 
         // Reset colors at the end so background doesn't bleed past the line.

@@ -21,7 +21,11 @@ impl CwdSegment {
         let parts: Vec<&str> = display.split(sep).filter(|s| !s.is_empty()).collect();
 
         // 如果原路径以分隔符开头（Unix 绝对路径或 UNC），保留它。
-        let leading = if display.starts_with(sep) { sep.to_string() } else { String::new() };
+        let leading = if display.starts_with(sep) {
+            sep.to_string()
+        } else {
+            String::new()
+        };
 
         if parts.len() > MAX_SEGMENTS {
             // 保留首段（如 `~` 或盘符），尾部 2 段，中间 `...`
@@ -98,7 +102,11 @@ mod tests {
         let p = r"E:\work\a\b\c\d\e\EFlowCodeLine";
         let out = CwdSegment::format_path(p);
         assert!(out.contains("..."), "expected ellipsis in {}", out);
-        assert!(out.ends_with(r"e\EFlowCodeLine"), "tail not preserved: {}", out);
+        assert!(
+            out.ends_with(r"e\EFlowCodeLine"),
+            "tail not preserved: {}",
+            out
+        );
     }
 
     #[test]

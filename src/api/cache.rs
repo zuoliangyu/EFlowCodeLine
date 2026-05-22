@@ -131,9 +131,7 @@ pub fn fetch_balance() -> Option<BalanceData> {
     if let Some(ref bc) = balance_config {
         if let (Some(ref access_token), Some(user_id)) = (&bc.access_token, bc.new_api_user_id) {
             let quota_per_unit = bc.quota_per_unit.unwrap_or(500_000.0);
-            if let Ok(data) =
-                client.get_user_self_balance(access_token, user_id, quota_per_unit)
-            {
+            if let Ok(data) = client.get_user_self_balance(access_token, user_id, quota_per_unit) {
                 set_in_memory_balance(&key, &data);
                 let _ = save_cached_balance(&key, &data);
                 return Some(data);
