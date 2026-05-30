@@ -11,7 +11,6 @@ pub struct ModelConfig {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ModelEntry {
     pub pattern: String,
-    pub display_name: String,
     pub context_limit: u32,
 }
 
@@ -75,22 +74,6 @@ impl ModelConfig {
         200_000
     }
 
-    /// Get display name for a model based on ID pattern matching
-    /// Checks external config first, then falls back to built-in config
-    /// Returns None if no match found (should use fallback display_name)
-    pub fn get_display_name(&self, model_id: &str) -> Option<String> {
-        let model_lower = model_id.to_lowercase();
-
-        // Check model entries
-        for entry in &self.model_entries {
-            if model_lower.contains(&entry.pattern.to_lowercase()) {
-                return Some(entry.display_name.clone());
-            }
-        }
-
-        None
-    }
-
     /// Create default model configuration file with minimal template
     pub fn create_default_file<P: AsRef<Path>>(path: P) -> Result<(), Box<dyn std::error::Error>> {
         // Create a minimal template config (not the full fallback config)
@@ -103,19 +86,18 @@ impl ModelConfig {
         // Add comments and examples to the template
         let template_content = format!(
             "# EFlowCodeLine Model Configuration\n\
-             # This file defines model display names and context limits for different LLM models\n\
+             # This file defines context limits for different LLM models\n\
              # File location: ~/.claude/eflowcodeline/models.toml\n\
              \n\
              {}\n\
              \n\
              # Model configurations\n\
-             # Each [[models]] section defines a model pattern and its properties\n\
+             # Each [[models]] section defines a model pattern and its context limit\n\
              # Order matters: first match wins, so put more specific patterns first\n\
              \n\
              # Example of how to add new models:\n\
              # [[models]]\n\
              # pattern = \"glm-4.5\"\n\
-             # display_name = \"GLM-4.5\"\n\
              # context_limit = 128000\n",
             toml_content.trim()
         );
@@ -138,142 +120,103 @@ impl Default for ModelConfig {
                 // Claude Code format: claude-opus-4-7[1m]
                 ModelEntry {
                     pattern: "opus-4-7[1m]".to_string(),
-                    display_name: "Opus 4.7 1M".to_string(),
-                    context_limit: 1_000_000,
-                },
-                ModelEntry {
-                    pattern: "opus-4.7[1m]".to_string(),
-                    display_name: "Opus 4.7 1M".to_string(),
                     context_limit: 1_000_000,
                 },
                 ModelEntry {
                     pattern: "sonnet-4-7[1m]".to_string(),
-                    display_name: "Sonnet 4.7 1M".to_string(),
-                    context_limit: 1_000_000,
-                },
-                ModelEntry {
-                    pattern: "sonnet-4.7[1m]".to_string(),
-                    display_name: "Sonnet 4.7 1M".to_string(),
                     context_limit: 1_000_000,
                 },
                 ModelEntry {
                     pattern: "haiku-4-7[1m]".to_string(),
-                    display_name: "Haiku 4.7 1M".to_string(),
                     context_limit: 1_000_000,
                 },
                 // Claude Code format: claude-opus-4-6[1m]
                 ModelEntry {
                     pattern: "opus-4-6[1m]".to_string(),
-                    display_name: "Opus 4.6 1M".to_string(),
-                    context_limit: 1_000_000,
-                },
-                ModelEntry {
-                    pattern: "opus-4.6[1m]".to_string(),
-                    display_name: "Opus 4.6 1M".to_string(),
                     context_limit: 1_000_000,
                 },
                 ModelEntry {
                     pattern: "sonnet-4-6[1m]".to_string(),
-                    display_name: "Sonnet 4.6 1M".to_string(),
                     context_limit: 1_000_000,
                 },
                 // Sub2API proxy format: 1mopus, 1msonnet
                 ModelEntry {
                     pattern: "1mopus".to_string(),
-                    display_name: "Opus 4.6 1M".to_string(),
                     context_limit: 1_000_000,
                 },
                 ModelEntry {
                     pattern: "1msonnet".to_string(),
-                    display_name: "Sonnet 4.6 1M".to_string(),
                     context_limit: 1_000_000,
                 },
                 // Generic 1M fallback
                 ModelEntry {
                     pattern: "[1m]".to_string(),
-                    display_name: "Claude 1M".to_string(),
                     context_limit: 1_000_000,
                 },
-                // Claude 4.x series — specific version first
+                // Claude 4.x series
                 ModelEntry {
                     pattern: "opus-4-7".to_string(),
-                    display_name: "Opus 4.7".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "opus-4.7".to_string(),
-                    display_name: "Opus 4.7".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "sonnet-4-7".to_string(),
-                    display_name: "Sonnet 4.7".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "sonnet-4.7".to_string(),
-                    display_name: "Sonnet 4.7".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "haiku-4-7".to_string(),
-                    display_name: "Haiku 4.7".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "opus-4-6".to_string(),
-                    display_name: "Opus 4.6".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "opus-4.6".to_string(),
-                    display_name: "Opus 4.6".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "sonnet-4-6".to_string(),
-                    display_name: "Sonnet 4.6".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "opus-4-5".to_string(),
-                    display_name: "Opus 4.5".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "sonnet-4-5".to_string(),
-                    display_name: "Sonnet 4.5".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "haiku-4-5".to_string(),
-                    display_name: "Haiku 4.5".to_string(),
                     context_limit: 200_000,
                 },
                 ModelEntry {
                     pattern: "claude-3-7-sonnet".to_string(),
-                    display_name: "Sonnet 3.7".to_string(),
                     context_limit: 200_000,
                 },
                 // Third-party models
                 ModelEntry {
                     pattern: "glm-4.5".to_string(),
-                    display_name: "GLM-4.5".to_string(),
                     context_limit: 128_000,
                 },
                 ModelEntry {
                     pattern: "kimi-k2-turbo".to_string(),
-                    display_name: "Kimi K2 Turbo".to_string(),
                     context_limit: 128_000,
                 },
                 ModelEntry {
                     pattern: "kimi-k2".to_string(),
-                    display_name: "Kimi K2".to_string(),
                     context_limit: 128_000,
                 },
                 ModelEntry {
                     pattern: "qwen3-coder".to_string(),
-                    display_name: "Qwen Coder".to_string(),
                     context_limit: 256_000,
                 },
             ],

@@ -1,5 +1,5 @@
 use super::{Segment, SegmentData};
-use crate::config::{InputData, ModelConfig, SegmentId};
+use crate::config::{InputData, SegmentId};
 use std::collections::HashMap;
 
 #[derive(Default)]
@@ -17,8 +17,16 @@ impl Segment for ModelSegment {
         metadata.insert("model_id".to_string(), input.model.id.clone());
         metadata.insert("display_name".to_string(), input.model.display_name.clone());
 
+        // Use Claude Code's display_name directly — no remapping needed.
+        // This avoids stale hardcoded mappings when vendors release new models.
+        let display_name = if input.model.display_name.is_empty() {
+            &input.model.id
+        } else {
+            &input.model.display_name
+        };
+
         Some(SegmentData {
-            primary: self.format_model_name(&input.model.id, &input.model.display_name),
+            primary: display_name.to_string(),
             secondary: String::new(),
             metadata,
         })
@@ -26,19 +34,5 @@ impl Segment for ModelSegment {
 
     fn id(&self) -> SegmentId {
         SegmentId::Model
-    }
-}
-
-impl ModelSegment {
-    fn format_model_name(&self, id: &str, display_name: &str) -> String {
-        let model_config = ModelConfig::load();
-
-        // Try to get display name from external config first
-        if let Some(config_name) = model_config.get_display_name(id) {
-            config_name
-        } else {
-            // Fallback to Claude Code's official display_name for unrecognized models
-            display_name.to_string()
-        }
     }
 }

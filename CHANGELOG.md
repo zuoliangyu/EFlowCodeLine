@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1] - 2026-05-30
+
+### Changed
+
+- **模型名称段简化**：移除本地硬编码的模型名称重映射，直接使用 Claude Code 上报的原始 `display_name`，避免厂商更新模型后映射失效的问题
+- `ModelEntry` 结构体移除 `display_name` 字段，仅保留 `pattern` 和 `context_limit`
+
 ## [1.7.0] - 2026-05-22
 
 ### Added
