@@ -23,7 +23,23 @@ EFlowCodeLine 是 **EFlowCode 专用版** Claude Code 状态栏工具，集成�
 
 ## 安装
 
-从 [Releases](https://github.com/zuoliangyu/EFlowCodeLine/releases) 页面下载对应平台的二进制文件。
+### npm（推荐）
+
+```bash
+npm install -g @zuolan/eflowcodeline
+```
+
+安装时会**自动**完成：
+
+1. 按当前平台下载对应的二进制文件
+2. 复制到 `~/.claude/eflowcodeline/`（Windows 为 `%USERPROFILE%\.claude\eflowcodeline\`）
+3. 运行 `eflowcodeline --init` 初始化配置
+
+无需手动下载或复制，装完即可进入下面的「配置 Claude Code 状态栏」。
+
+### 手动下载（可选）
+
+如不便使用 npm，也可从 [Releases](https://github.com/zuoliangyu/EFlowCodeLine/releases) 页面下载对应平台的二进制文件，解压后放到 `~/.claude/eflowcodeline/` 即可。
 
 | 平台 | 文件名 | 说明 |
 |------|--------|------|
@@ -36,20 +52,9 @@ EFlowCodeLine 是 **EFlowCode 专用版** Claude Code 状态栏工具，集成�
 | Linux ARMv7 | `eflowcodeline-linux-armv7.tar.gz` | 树莓派 2/3、32 位 ARM 嵌入式设备 |
 | Windows x64 | `eflowcodeline-windows-x64.zip` | 64 位 Windows |
 
-```bash
-# macOS / Linux / ARM Linux
-mkdir -p ~/.claude/eflowcodeline
-wget https://github.com/zuoliangyu/EFlowCodeLine/releases/latest/download/eflowcodeline-linux-arm64.tar.gz
-tar -xzf eflowcodeline-linux-arm64.tar.gz
-cp eflowcodeline ~/.claude/eflowcodeline/
-chmod +x ~/.claude/eflowcodeline/eflowcodeline
-```
-
-Windows 直接下载 `.exe`，双击运行即可进入配置界面，程序会自动安装到 `%USERPROFILE%\.claude\eflowcodeline\` 目录。
-
 ## 配置 Claude Code 状态栏
 
-在 `~/.claude/settings.json` 中加入：
+在 `~/.claude/settings.json` 中加入（路径指向上面安装好的二进制）：
 
 ```json
 {
@@ -65,7 +70,7 @@ Windows 示例：
 ```json
 {
   "statusLine": {
-    "command": "C:/Users/zuolan/.claude/eflowcodeline/eflowcodeline.exe",
+    "command": "C:/Users/<USERNAME>/.claude/eflowcodeline/eflowcodeline.exe",
     "padding": 0,
     "type": "command"
   }

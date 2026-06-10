@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.7.2] - 2026-06-10
+
+### Fixed
+
+- **第三方/中转模型显示真实模型名**：模型段优先读取 transcript 中最后一条 assistant 消息的真实 `model`（如 `gpt-*` / `deepseek-*` / `glm-*`），读不到时才回退到 Claude Code 上报的 `display_name`/`id`。修复经中转站做模型映射后，状态栏错误显示 Claude 模型名的问题（跳过 `<synthetic>` 占位条目）
+
+### Docs
+
+- README（仓库版与 npm 版）改以 `npm install -g @zuolan/eflowcodeline` 为推荐安装方式，并说明安装时自动下载、复制到 `~/.claude/eflowcodeline/` 并初始化，无需手动复制
+- 修正 npm 版 README 中错误的 `statusCommand` 配置为正确的 `statusLine`，并补充 Windows 示例；移除与 v1.7.0 单主题锁定相矛盾的过时多主题/`models.toml` 描述
+
 ## [1.7.1] - 2026-05-30
 
 ### Changed

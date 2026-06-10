@@ -405,6 +405,11 @@ pub type Usage = RawUsage;
 #[derive(Deserialize)]
 pub struct Message {
     pub usage: Option<Usage>,
+    /// Model that actually produced this assistant message. With a relay that
+    /// maps model names, this is the real upstream model (e.g. gpt-*, deepseek-*),
+    /// not the Claude name Claude Code reports in its status input.
+    #[serde(default)]
+    pub model: Option<String>,
 }
 
 #[derive(Deserialize)]

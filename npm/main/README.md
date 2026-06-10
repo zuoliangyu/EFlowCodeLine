@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@zuolan/eflowcodeline)](https://www.npmjs.com/package/@zuolan/eflowcodeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-EFlowCodeLine 是 **EFlowCode 专用版** Claude Code 状态栏工具，Rust 编写，支持余额显示、多主题、TUI 配置面板以及智能终端宽度换行。
+EFlowCodeLine 是 **EFlowCode 专用版** Claude Code 状态栏工具，Rust 编写，支持余额显示、三行 Powerline 布局以及智能终端宽度换行。
 
 > GitHub: https://github.com/zuoliangyu/EFlowCodeLine
 
@@ -13,48 +13,54 @@ EFlowCodeLine 是 **EFlowCode 专用版** Claude Code 状态栏工具，Rust 编
 npm install -g @zuolan/eflowcodeline
 ```
 
-安装完成后会自动：
-1. 将二进制文件复制到 `~/.claude/eflowcodeline/`
-2. 运行 `eflowcodeline --init` 初始化配置
+安装时会**自动**完成，无需手动下载或复制：
+
+1. 按当前平台下载对应的二进制文件
+2. 复制到 `~/.claude/eflowcodeline/`（Windows 为 `%USERPROFILE%\.claude\eflowcodeline\`）
+3. 运行 `eflowcodeline --init` 初始化配置
 
 ## 配置 Claude Code
 
-在 `~/.claude/settings.json` 中添加：
+在 `~/.claude/settings.json` 中加入（路径指向上面自动安装好的二进制）：
 
 ```json
 {
-  "statusCommand": "eflowcodeline"
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/eflowcodeline/eflowcodeline"
+  }
+}
+```
+
+Windows 示例：
+
+```json
+{
+  "statusLine": {
+    "command": "C:/Users/<USERNAME>/.claude/eflowcodeline/eflowcodeline.exe",
+    "padding": 0,
+    "type": "command"
+  }
 }
 ```
 
 ## 功能特性
 
 - **余额显示**：自动读取 Claude Code 已有 Token，无需额外配置
-- **多模型支持**：Opus 4.6 / Sonnet 4.6 / Haiku 4.5 / 1M context 模型 / 第三方模型（GLM、Kimi、Qwen 等）
+- **三行 Powerline 布局**（v1.7.0）：上下文/花费 → 路径/分支 → 已用/余额/EFLOWCODE，固定霓虹渐变配色
 - **智能换行**：自动检测终端宽度，超出时按 Segment 换行，不截断内容
-- **多主题**：内置 Default / Gruvbox / Nord / Tokyo Night / Rose Pine 等主题
-- **TUI 配置面板**：运行 `eflowcodeline --config` 交互式调整所有设置
 - **Git / 目录 / 上下文窗口 / 会话** 等多种 Segment
+
+> v1.7.0 起状态栏样式锁定为内置主题，不再支持 `--theme` 切换或自定义 `config.toml`。
 
 ## 命令
 
 ```bash
 eflowcodeline --help      # 查看帮助
 eflowcodeline --init      # 初始化配置文件
-eflowcodeline --config    # 打开 TUI 配置面板
+eflowcodeline --config    # 打开 TUI 配置面板（查看用）
 eflowcodeline --check     # 检查配置是否合法
 eflowcodeline --print     # 打印当前配置
-```
-
-## 自定义模型显示
-
-编辑 `~/.claude/eflowcodeline/models.toml` 添加自定义模型：
-
-```toml
-[[models]]
-pattern = "my-custom-model"
-display_name = "My Model"
-context_limit = 128000
 ```
 
 ## 支持平台
